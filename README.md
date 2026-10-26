@@ -110,6 +110,7 @@ Not deterministic, or not derived from the code:
 - **The parser is a regex.** It reads static `import … from '…'` and `import '…'` statements, and blanks out comments first. It ignores `export … from`, dynamic `import()`, `require`, tsconfig path aliases and barrel re-exports. It only resolves relative specifiers under `src/`.
 - **Public repository.** Image URLs point at `raw.githubusercontent.com`, which serves a private repository's files only with a token. The PR Lens Action uses `github.com/<repo>/raw/…` so that private repositories work too.
 - **Fork pull requests** get a read-only token, so the publish and comment steps cannot write there.
+- **Dark mode of the PR Lens pictures.** `pr-lens comment` wraps each `<picture>` in a link. GitHub adds a link of its own around the image, the nested links push the image out of the `<picture>`, and readers in dark mode get the light SVG. The own renderer's `<picture>` has no link around it for this reason.
 
 ## Run it locally
 

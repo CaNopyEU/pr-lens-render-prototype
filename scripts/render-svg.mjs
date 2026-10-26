@@ -44,7 +44,6 @@ const lanes = graph.lanes.filter((lane) => nodes.some((node) => node.lane === la
 const SANS = "Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
 const MONO = "'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace";
 
-// Advance per character in em, estimated high: Menlo and DejaVu Sans Mono are 0.602, Inter lowercase about 0.55.
 const EM = { sans: 0.58, mono: 0.62 };
 const textWidth = (text, size, family, tracking = 0) => [...text].length * size * (EM[family] + tracking);
 const ceilTo = (value, step) => Math.ceil(value / step) * step;
