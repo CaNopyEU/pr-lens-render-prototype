@@ -33,15 +33,25 @@ jobs:
           node-version: 22
 
       - name: Build the graph from git facts
-        run: node scripts/build-graph.mjs "$BASE_SHA" "$HEAD_SHA" "$PR_TITLE" "$RUNNER_TEMP/pr-diagram"
+        run: |
+          mkdir -p "$RUNNER_TEMP/pr-diagram"
+          echo '{"modelTokens": 0}' > "$RUNNER_TEMP/pr-diagram/timings.json"
+          node scripts/timed.mjs graphMs "$RUNNER_TEMP/pr-diagram/timings.json" -- \
+            node scripts/build-graph.mjs "$BASE_SHA" "$HEAD_SHA" "$PR_TITLE" "$RUNNER_TEMP/pr-diagram"
+
+      - name: Install the PR Lens CLI
+        run: node scripts/timed.mjs prLensInstallMs "$RUNNER_TEMP/pr-diagram/timings.json" -- npx --yes "$PR_LENS_CLI" --version
 
       - name: Validate against the PR Lens schema
-        run: npx --yes "$PR_LENS_CLI" validate "$RUNNER_TEMP/pr-diagram/graph.json"
+        run: node scripts/timed.mjs validateMs "$RUNNER_TEMP/pr-diagram/timings.json" -- npx --yes "$PR_LENS_CLI" validate "$RUNNER_TEMP/pr-diagram/graph.json"
 
       - name: Render light and dark SVGs
-        run: npx --yes "$PR_LENS_CLI" render "$RUNNER_TEMP/pr-diagram/graph.json" --theme both --out "$RUNNER_TEMP/pr-diagram/assets"
+        run: node scripts/timed.mjs renderMs "$RUNNER_TEMP/pr-diagram/timings.json" -- npx --yes "$PR_LENS_CLI" render "$RUNNER_TEMP/pr-diagram/graph.json" --theme both --out "$RUNNER_TEMP/pr-diagram/assets"
 
-      - name: Publish the SVGs to the data branch
+      - name: Draw the same facts as Mermaid
+        run: node scripts/timed.mjs mermaidMs "$RUNNER_TEMP/pr-diagram/timings.json" -- node scripts/build-mermaid.mjs "$RUNNER_TEMP/pr-diagram"
+
+      - name: Publish the SVGs and timings to the data branch
         id: publish
         run: bash scripts/publish.sh
         env:
