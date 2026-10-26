@@ -1,0 +1,54 @@
+name: PR diagram
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: pr-diagram-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  diagram:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PR_LENS_CLI: "@coldtea/pr-lens-cli@0.13.2"
+      DATA_BRANCH: pr-diagrams
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_TITLE: ${{ github.event.pull_request.title }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build the graph from git facts
+        run: node scripts/build-graph.mjs "$BASE_SHA" "$HEAD_SHA" "$PR_TITLE" "$RUNNER_TEMP/pr-diagram"
+
+      - name: Validate against the PR Lens schema
+        run: npx --yes "$PR_LENS_CLI" validate "$RUNNER_TEMP/pr-diagram/graph.json"
+
+      - name: Render light and dark SVGs
+        run: npx --yes "$PR_LENS_CLI" render "$RUNNER_TEMP/pr-diagram/graph.json" --theme both --out "$RUNNER_TEMP/pr-diagram/assets"
+
+      - name: Publish the SVGs to the data branch
+        id: publish
+        run: bash scripts/publish.sh
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Post or update the diagram comment
+        run: bash scripts/comment.sh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASSETS_URL: ${{ steps.publish.outputs.assets-url }}
