@@ -53,7 +53,7 @@ for ATTEMPT in 1 2 3 4 5; do
 
   mkdir -p "${DIRECTORY}"
   cp "${WORK}"/assets/*.svg "${DIRECTORY}/"
-  cp "${WORK}/graph.json" "${WORK}/facts.json" "${DIRECTORY}/"
+  cp "${WORK}/graph.json" "${WORK}/facts.json" "${WORK}/timings.json" "${DIRECTORY}/"
   git add "${DIRECTORY}"
 
   if git diff --quiet --cached; then

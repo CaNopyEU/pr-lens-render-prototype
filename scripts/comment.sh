@@ -71,9 +71,35 @@ cli comment \
   --asset-base-url "${ASSETS_URL}" \
   --out "${BODY}"
 
+SEPARATOR_LINE="$(grep -n '^---$' "${BODY}" | tail -n 1 | cut -d: -f1 || true)"
+SECTION="${WORK}/mermaid-section.md"
+
+{
+  printf '### Same facts, drawn by Mermaid\n\n'
+  cat "${WORK}/mermaid.md"
+  printf '\n'
+} > "${SECTION}"
+
+# The PR Lens footer starts at its last horizontal rule; the Mermaid section goes above it.
+if [ -n "${SEPARATOR_LINE}" ]; then
+  {
+    head -n "$(( SEPARATOR_LINE - 1 ))" "${BODY}"
+    cat "${SECTION}"
+    tail -n +"${SEPARATOR_LINE}" "${BODY}"
+  } > "${BODY}.next"
+  mv "${BODY}.next" "${BODY}"
+else
+  printf '\n' >> "${BODY}"
+  cat "${SECTION}" >> "${BODY}"
+fi
+
+TIMING_LINE="$(jq -r '"Generated in CI: graph \(.graphMs) ms · PR Lens install \(.prLensInstallMs) ms · validate \(.validateMs) ms · render \(.renderMs) ms · Mermaid \(.mermaidMs) ms · model tokens: \(.modelTokens)"' "${WORK}/timings.json")"
+
 cat >> "${BODY}" <<EOF
 
 <sub>No model was called. Every box is a file from <code>git diff --name-status</code> or a direct import neighbour of one, and every arrow is an import statement, as parsed by <a href="https://github.com/${GITHUB_REPOSITORY}/blob/${HEAD_SHA}/scripts/build-graph.mjs">scripts/build-graph.mjs</a>. The line each one comes from: <a href="${ASSETS_URL}/facts.json">facts.json</a>.</sub>
+
+<sub>${TIMING_LINE}</sub>
 EOF
 
 MARKER="$(cli comment --print-marker)"

@@ -16,18 +16,23 @@ flowchart LR
   imports --> build
   build --> graph["graph.json"]
   build --> facts["facts.json"]
+  graph --> mermaid["scripts/build-mermaid.mjs"]
+  facts --> mermaid
   graph --> validate["pr-lens validate"]
   validate --> render["pr-lens render<br/>light + dark SVG"]
   render --> branch["orphan branch pr-diagrams<br/>pr/&lt;number&gt;/&lt;head-sha&gt;/"]
   facts --> branch
   branch --> compose["pr-lens comment<br/>--asset-base-url"]
   compose --> comment["one PR comment,<br/>updated in place"]
+  mermaid --> comment
 ```
 
 | Step | Where |
 | --- | --- |
 | Build the graph from git facts | [`scripts/build-graph.mjs`](scripts/build-graph.mjs) (Node ≥ 20, no dependencies) |
 | Validate, render, compose the comment | `npx @coldtea/pr-lens-cli@0.13.2` (`validate`, `render`, `comment`) |
+| Draw the same facts as Mermaid | [`scripts/build-mermaid.mjs`](scripts/build-mermaid.mjs) (Node ≥ 20, no dependencies) |
+| Time each step into `timings.json` | [`scripts/timed.mjs`](scripts/timed.mjs) |
 | Publish SVGs to the `pr-diagrams` branch | [`scripts/publish.sh`](scripts/publish.sh), adapted from the PR Lens Action |
 | Create or update the one comment | [`scripts/comment.sh`](scripts/comment.sh), adapted from the PR Lens Action |
 | Wire it to `pull_request` | [`.github/workflows/pr-diagram.yml`](.github/workflows/pr-diagram.yml) |
@@ -44,6 +49,18 @@ No API key, no secret and no prlens.dev account are involved. The workflow uses 
 - **Data flow.** A depth-first walk of the imports from `src/http/routes.ts`, in source order, over the imports at head plus the ones that exist only at the merge base. Each changed file the walk reaches gets one row: the chain of imports the walk took to get there, cut to the last 3 files. A changed file that already sits on another row's chain gets no row of its own.
 - **Text.** The title is the PR title. Labels are file basenames and imported names. Summaries are fixed sentence templates filled with counts.
 - **`facts.json`.** Lists, for every node, the diff line or the import that put it in the graph. For every edge, it gives the `file:line` of each import statement at head and at base. It is published next to the SVGs and linked from the comment.
+
+## Mermaid version
+
+Under the PR Lens pictures the comment has a second section, "Same facts, drawn by Mermaid". [`scripts/build-mermaid.mjs`](scripts/build-mermaid.mjs) reads `graph.json` and `facts.json` and writes `mermaid.md`, which `comment.sh` places in the same comment. Mermaid is a text format that GitHub draws itself, so unlike the SVGs these diagrams can be read and diffed as text. It has three diagrams:
+
+- **Architecture.** One `flowchart LR` with a subgraph per `src/<dir>`, a box per file in the PR Lens views (green added, amber changed, red dashed removed, grey unchanged context) and an arrow per import statement those views draw, labelled with the same imported names.
+- **Static import paths.** The chains of the PR Lens import-path view as one flowchart, one subgraph per chain. Still import statements, not a runtime trace.
+- **Animated edges (experimental).** The architecture diagram again, in a collapsed block, with edge ids and `animate: true` on every edge that touches a changed file. This is Mermaid 11 syntax, and it is not known whether GitHub's Mermaid supports it, so it sits in its own block: a version that cannot parse it shows a syntax error there and nowhere else.
+
+Both renderers draw the same facts. The script adds no box or arrow of its own, and stops if one in `graph.json` is missing from `facts.json` or has a different state there.
+
+Each CI step is also timed by `scripts/timed.mjs`. The numbers go to `timings.json`, which is published next to the SVGs, and into the last line of the comment.
 
 ## What is deterministic, and what is not
 
@@ -73,9 +90,10 @@ Not deterministic, or not derived from the code:
 node scripts/build-graph.mjs main feature/discount-codes "Replace hard-coded coupons with discount codes" .pr-diagram
 npx --yes @coldtea/pr-lens-cli@0.13.2 validate .pr-diagram/graph.json
 npx --yes @coldtea/pr-lens-cli@0.13.2 render .pr-diagram/graph.json --out .pr-diagram/assets
+node scripts/build-mermaid.mjs .pr-diagram
 ```
 
-The script prints the views it made and any edges it dropped. Open the SVGs in a browser to see the animation.
+The script prints the views it made and any edges it dropped. Open the SVGs in a browser to see the animation. `.pr-diagram/mermaid.md` holds the Mermaid section of the comment.
 
 ## The demo app
 
