@@ -1,6 +1,6 @@
 import { findBook } from "../catalog/bookRepository";
-import { applyCoupon } from "../pricing/couponRules";
-import { priceCart, type PricedCart, type PricedLine } from "../pricing/priceCalculator";
+import { lookupDiscount } from "../pricing/discountCodes";
+import { priceCart, subtotalOf, type PricedCart, type PricedLine } from "../pricing/priceCalculator";
 
 export type CartItem = {
   isbn: string;
@@ -11,7 +11,7 @@ export type CheckoutResult =
   | { ok: true; cart: PricedCart }
   | { ok: false; error: string };
 
-export function checkout(items: CartItem[], couponCode?: string): CheckoutResult {
+export function checkout(items: CartItem[], discountCode?: string, today = new Date().toISOString().slice(0, 10)): CheckoutResult {
   const lines: PricedLine[] = [];
 
   for (const item of items) {
@@ -21,6 +21,10 @@ export function checkout(items: CartItem[], couponCode?: string): CheckoutResult
     lines.push({ isbn: book.isbn, quantity: item.quantity, unitCents: book.priceCents });
   }
 
-  const subtotalCents = lines.reduce((sum, line) => sum + line.unitCents * line.quantity, 0);
-  return { ok: true, cart: priceCart(lines, applyCoupon(couponCode, subtotalCents)) };
+  if (discountCode === undefined) return { ok: true, cart: priceCart(lines) };
+
+  const lookup = lookupDiscount(discountCode, subtotalOf(lines), today);
+  if (!lookup.ok) return { ok: false, error: `discount code ${discountCode} is ${lookup.reason}` };
+
+  return { ok: true, cart: priceCart(lines, lookup.discount) };
 }
