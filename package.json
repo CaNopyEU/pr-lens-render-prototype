@@ -1,0 +1,11 @@
+{
+  "name": "pr-lens-render-prototype",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "elkjs": "0.12.0"
+  }
+}

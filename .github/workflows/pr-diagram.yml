@@ -48,6 +48,12 @@ jobs:
       - name: Render light and dark SVGs
         run: node scripts/timed.mjs renderMs "$RUNNER_TEMP/pr-diagram/timings.json" -- npx --yes "$PR_LENS_CLI" render "$RUNNER_TEMP/pr-diagram/graph.json" --theme both --out "$RUNNER_TEMP/pr-diagram/assets"
 
+      - name: Install elkjs for the own renderer
+        run: node scripts/timed.mjs elkInstallMs "$RUNNER_TEMP/pr-diagram/timings.json" -- npm ci --no-audit --no-fund
+
+      - name: Draw the same facts with the own SVG renderer
+        run: node scripts/timed.mjs ownSvgMs "$RUNNER_TEMP/pr-diagram/timings.json" -- node scripts/render-svg.mjs "$RUNNER_TEMP/pr-diagram"
+
       - name: Draw the same facts as Mermaid
         run: node scripts/timed.mjs mermaidMs "$RUNNER_TEMP/pr-diagram/timings.json" -- node scripts/build-mermaid.mjs "$RUNNER_TEMP/pr-diagram"
 

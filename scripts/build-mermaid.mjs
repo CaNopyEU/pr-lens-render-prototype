@@ -146,10 +146,9 @@ const sections = [
       ]
     : []),
   [
-    "<details>\n<summary>Experimental: animated edges (Mermaid 11 syntax, GitHub support unknown)</summary>",
+    "<details>\n<summary>Animated edges (Mermaid 11 edge animation, which GitHub renders: verified on this PR)</summary>",
     "The architecture diagram again, with an id on every edge and `animate: true` on the edges that touch a changed file.",
     fence(drawArchitecture({ animated: true })),
-    "If this block shows a syntax error, GitHub's Mermaid is older than the edge-id syntax.",
     "</details>",
   ],
 ];
