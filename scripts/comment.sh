@@ -79,8 +79,9 @@ OWN_ALT="$(jq -rn --arg title "${PR_TITLE}" '"Import graph of the change: " + $t
 {
   printf '### Same facts, own SVG renderer (ELK layout, architecture-diagrams presets)\n\n'
   printf 'One picture for the whole change instead of one per pair of directories, at most 830 px wide so GitHub does not scale it down. Laid out by [ELK](https://eclipse.dev/elk/) (layered, orthogonal edges, one box per directory) and drawn by [`scripts/render-svg.mjs`](https://github.com/%s/blob/%s/scripts/render-svg.mjs) in the *blueprint* preset (light) and the *terminal* preset (dark). Status is a colour and a word on every box. A moving dot follows each import that touches a changed file, in walk order from `src/http/routes.ts`.\n\n' "${GITHUB_REPOSITORY}" "${HEAD_SHA}"
-  printf '<a href="%s/own-light.svg"><picture>\n  <source media="(prefers-color-scheme: dark)" srcset="%s/own-dark.svg">\n  <img alt="%s" src="%s/own-light.svg" width="%s">\n</picture></a>\n\n' \
-    "${ASSETS_URL}" "${ASSETS_URL}" "${OWN_ALT}" "${ASSETS_URL}" "${OWN_WIDTH}"
+  printf '<picture>\n  <source media="(prefers-color-scheme: dark)" srcset="%s/own-dark.svg">\n  <img alt="%s" src="%s/own-light.svg" width="%s">\n</picture>\n\n' \
+    "${ASSETS_URL}" "${OWN_ALT}" "${ASSETS_URL}" "${OWN_WIDTH}"
+  printf '<sub>Open as SVG: <a href="%s/own-light.svg">light</a> · <a href="%s/own-dark.svg">dark</a></sub>\n\n' "${ASSETS_URL}" "${ASSETS_URL}"
   printf '### Same facts, drawn by Mermaid\n\n'
   cat "${WORK}/mermaid.md"
   printf '\n'
