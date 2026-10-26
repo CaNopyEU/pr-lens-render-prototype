@@ -72,15 +72,21 @@ cli comment \
   --out "${BODY}"
 
 SEPARATOR_LINE="$(grep -n '^---$' "${BODY}" | tail -n 1 | cut -d: -f1 || true)"
-SECTION="${WORK}/mermaid-section.md"
+SECTION="${WORK}/extra-sections.md"
+OWN_WIDTH="$(sed -n 's/^<svg[^>]* width="\([0-9]*\)".*/\1/p' "${WORK}/assets/own-light.svg" | head -n 1)"
+OWN_ALT="$(jq -rn --arg title "${PR_TITLE}" '"Import graph of the change: " + $title | @html')"
 
 {
+  printf '### Same facts, own SVG renderer (ELK layout, architecture-diagrams presets)\n\n'
+  printf 'One picture for the whole change instead of one per pair of directories, at most 830 px wide so GitHub does not scale it down. Laid out by [ELK](https://eclipse.dev/elk/) (layered, orthogonal edges, one box per directory) and drawn by [`scripts/render-svg.mjs`](https://github.com/%s/blob/%s/scripts/render-svg.mjs) in the *blueprint* preset (light) and the *terminal* preset (dark). Status is a colour and a word on every box. A moving dot follows each import that touches a changed file, in walk order from `src/http/routes.ts`.\n\n' "${GITHUB_REPOSITORY}" "${HEAD_SHA}"
+  printf '<a href="%s/own-light.svg"><picture>\n  <source media="(prefers-color-scheme: dark)" srcset="%s/own-dark.svg">\n  <img alt="%s" src="%s/own-light.svg" width="%s">\n</picture></a>\n\n' \
+    "${ASSETS_URL}" "${ASSETS_URL}" "${OWN_ALT}" "${ASSETS_URL}" "${OWN_WIDTH}"
   printf '### Same facts, drawn by Mermaid\n\n'
   cat "${WORK}/mermaid.md"
   printf '\n'
 } > "${SECTION}"
 
-# The PR Lens footer starts at its last horizontal rule; the Mermaid section goes above it.
+# The PR Lens footer starts at its last horizontal rule; the extra sections go above it.
 if [ -n "${SEPARATOR_LINE}" ]; then
   {
     head -n "$(( SEPARATOR_LINE - 1 ))" "${BODY}"
@@ -93,7 +99,7 @@ else
   cat "${SECTION}" >> "${BODY}"
 fi
 
-TIMING_LINE="$(jq -r '"Generated in CI: graph \(.graphMs) ms · PR Lens install \(.prLensInstallMs) ms · validate \(.validateMs) ms · render \(.renderMs) ms · Mermaid \(.mermaidMs) ms · model tokens: \(.modelTokens)"' "${WORK}/timings.json")"
+TIMING_LINE="$(jq -r '"Generated in CI: graph \(.graphMs) ms · PR Lens install \(.prLensInstallMs) ms · validate \(.validateMs) ms · render \(.renderMs) ms · elkjs install \(.elkInstallMs) ms · own SVG \(.ownSvgMs) ms · Mermaid \(.mermaidMs) ms · model tokens: \(.modelTokens)"' "${WORK}/timings.json")"
 
 cat >> "${BODY}" <<EOF
 
