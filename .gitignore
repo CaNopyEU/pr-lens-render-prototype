@@ -1,0 +1,4 @@
+.pr-diagram/
+.pr-lens/
+node_modules/
+.DS_Store
