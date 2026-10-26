@@ -1,0 +1,510 @@
+{
+  "schemaVersion": "0.2.0",
+  "kind": "graph",
+  "title": "Replace hard-coded coupons with discount codes",
+  "summary": "Drawn from git facts only, no model: 4 changed source files (1 added, 2 modified, 1 removed) and the files that import them or that they import. A box is a file, an arrow is one import statement, and facts.json gives the line each comes from.",
+  "lenses": [
+    "architecture",
+    "data-flow"
+  ],
+  "provenance": {
+    "repo": {
+      "owner": "CaNopyEU",
+      "name": "pr-lens-render-prototype",
+      "host": "github.com"
+    },
+    "base": {
+      "sha": "e81aa4bf30f75ea3d3dcd7694f4606c3748c237f",
+      "ref": "main"
+    },
+    "head": {
+      "sha": "1c781698284bae3ff46c46153df1b37779dfd465",
+      "ref": "feature/discount-codes"
+    },
+    "pullRequest": {
+      "number": 1,
+      "title": "Replace hard-coded coupons with discount codes",
+      "url": "https://github.com/CaNopyEU/pr-lens-render-prototype/pull/1"
+    },
+    "generator": {
+      "name": "build-graph",
+      "version": "0.1.0"
+    }
+  },
+  "lanes": [
+    {
+      "id": "src/http",
+      "label": "src/http",
+      "order": 0
+    },
+    {
+      "id": "src/checkout",
+      "label": "src/checkout",
+      "order": 1
+    },
+    {
+      "id": "src/catalog",
+      "label": "src/catalog",
+      "order": 2
+    },
+    {
+      "id": "src/pricing",
+      "label": "src/pricing",
+      "order": 3
+    }
+  ],
+  "nodes": [
+    {
+      "id": "src/http/routes.ts",
+      "label": "routes",
+      "kind": "module",
+      "delta": "unchanged",
+      "lane": "src/http",
+      "files": [
+        {
+          "path": "src/http/routes.ts"
+        }
+      ],
+      "badges": []
+    },
+    {
+      "id": "src/checkout/checkoutService.ts",
+      "label": "checkoutService",
+      "kind": "module",
+      "delta": "modified",
+      "lane": "src/checkout",
+      "files": [
+        {
+          "path": "src/checkout/checkoutService.ts"
+        }
+      ],
+      "badges": [
+        "+9 −5"
+      ]
+    },
+    {
+      "id": "src/catalog/bookRepository.ts",
+      "label": "bookRepository",
+      "kind": "module",
+      "delta": "unchanged",
+      "lane": "src/catalog",
+      "files": [
+        {
+          "path": "src/catalog/bookRepository.ts"
+        }
+      ],
+      "badges": []
+    },
+    {
+      "id": "src/pricing/discountCodes.ts",
+      "label": "discountCodes",
+      "kind": "module",
+      "delta": "added",
+      "lane": "src/pricing",
+      "files": [
+        {
+          "path": "src/pricing/discountCodes.ts"
+        }
+      ],
+      "badges": [
+        "+29 −0"
+      ]
+    },
+    {
+      "id": "src/pricing/priceCalculator.ts",
+      "label": "priceCalculator",
+      "kind": "module",
+      "delta": "modified",
+      "lane": "src/pricing",
+      "files": [
+        {
+          "path": "src/pricing/priceCalculator.ts"
+        }
+      ],
+      "badges": [
+        "+20 −5"
+      ]
+    },
+    {
+      "id": "src/pricing/couponRules.ts",
+      "label": "couponRules",
+      "kind": "module",
+      "delta": "removed",
+      "lane": "src/pricing",
+      "files": [
+        {
+          "path": "src/pricing/couponRules.ts",
+          "revision": "base"
+        }
+      ],
+      "badges": [
+        "+0 −10"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "import:src/http/routes.ts:src/checkout/checkoutService.ts",
+      "from": "src/http/routes.ts",
+      "to": "src/checkout/checkoutService.ts",
+      "kind": "dependency",
+      "delta": "unchanged",
+      "label": "checkout, CartItem",
+      "emphasis": "normal",
+      "animated": false,
+      "files": [
+        {
+          "path": "src/http/routes.ts",
+          "startLine": 1
+        }
+      ]
+    },
+    {
+      "id": "import:src/checkout/checkoutService.ts:src/catalog/bookRepository.ts",
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/catalog/bookRepository.ts",
+      "kind": "dependency",
+      "delta": "unchanged",
+      "label": "findBook",
+      "emphasis": "normal",
+      "animated": false,
+      "files": [
+        {
+          "path": "src/checkout/checkoutService.ts",
+          "startLine": 1
+        }
+      ]
+    },
+    {
+      "id": "import:src/checkout/checkoutService.ts:src/pricing/couponRules.ts",
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/couponRules.ts",
+      "kind": "dependency",
+      "delta": "removed",
+      "label": "applyCoupon",
+      "emphasis": "normal",
+      "animated": false,
+      "files": [
+        {
+          "path": "src/checkout/checkoutService.ts",
+          "startLine": 2,
+          "revision": "base"
+        }
+      ]
+    },
+    {
+      "id": "import:src/checkout/checkoutService.ts:src/pricing/discountCodes.ts",
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/discountCodes.ts",
+      "kind": "dependency",
+      "delta": "added",
+      "label": "lookupDiscount",
+      "emphasis": "normal",
+      "animated": true,
+      "files": [
+        {
+          "path": "src/checkout/checkoutService.ts",
+          "startLine": 2
+        }
+      ]
+    },
+    {
+      "id": "import:src/checkout/checkoutService.ts:src/pricing/priceCalculator.ts",
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/priceCalculator.ts",
+      "kind": "dependency",
+      "delta": "modified",
+      "label": "priceCart, subtotalOf, PricedCart +1",
+      "emphasis": "normal",
+      "animated": true,
+      "files": [
+        {
+          "path": "src/checkout/checkoutService.ts",
+          "startLine": 3
+        }
+      ]
+    },
+    {
+      "id": "import:src/pricing/priceCalculator.ts:src/pricing/discountCodes.ts",
+      "from": "src/pricing/priceCalculator.ts",
+      "to": "src/pricing/discountCodes.ts",
+      "kind": "dependency",
+      "delta": "added",
+      "label": "Discount",
+      "emphasis": "normal",
+      "animated": true,
+      "files": [
+        {
+          "path": "src/pricing/priceCalculator.ts",
+          "startLine": 1
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "id": "import-path-1",
+      "title": "routes → checkoutService → discountCodes",
+      "summary": "First chain of import statements a depth-first walk from src/http/routes.ts takes to reach src/pricing/discountCodes.ts.",
+      "delta": "added",
+      "participants": [
+        {
+          "node": "src/http/routes.ts"
+        },
+        {
+          "node": "src/checkout/checkoutService.ts"
+        },
+        {
+          "node": "src/pricing/discountCodes.ts"
+        }
+      ],
+      "messages": [
+        {
+          "id": "hop-1",
+          "from": "src/http/routes.ts",
+          "to": "src/checkout/checkoutService.ts",
+          "label": "imports checkout, CartItem",
+          "kind": "sync",
+          "delta": "unchanged",
+          "animated": true,
+          "files": [
+            {
+              "path": "src/http/routes.ts",
+              "startLine": 1
+            }
+          ]
+        },
+        {
+          "id": "hop-2",
+          "from": "src/checkout/checkoutService.ts",
+          "to": "src/pricing/discountCodes.ts",
+          "label": "imports lookupDiscount",
+          "kind": "sync",
+          "delta": "added",
+          "animated": true,
+          "files": [
+            {
+              "path": "src/checkout/checkoutService.ts",
+              "startLine": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "import-path-2",
+      "title": "routes → checkoutService → priceCalculator",
+      "summary": "First chain of import statements a depth-first walk from src/http/routes.ts takes to reach src/pricing/priceCalculator.ts.",
+      "delta": "modified",
+      "participants": [
+        {
+          "node": "src/http/routes.ts"
+        },
+        {
+          "node": "src/checkout/checkoutService.ts"
+        },
+        {
+          "node": "src/pricing/priceCalculator.ts"
+        }
+      ],
+      "messages": [
+        {
+          "id": "hop-1",
+          "from": "src/http/routes.ts",
+          "to": "src/checkout/checkoutService.ts",
+          "label": "imports checkout, CartItem",
+          "kind": "sync",
+          "delta": "unchanged",
+          "animated": true,
+          "files": [
+            {
+              "path": "src/http/routes.ts",
+              "startLine": 1
+            }
+          ]
+        },
+        {
+          "id": "hop-2",
+          "from": "src/checkout/checkoutService.ts",
+          "to": "src/pricing/priceCalculator.ts",
+          "label": "imports priceCart, subtotalOf +2",
+          "kind": "sync",
+          "delta": "modified",
+          "animated": true,
+          "files": [
+            {
+              "path": "src/checkout/checkoutService.ts",
+              "startLine": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "import-path-3",
+      "title": "routes → checkoutService → couponRules",
+      "summary": "First chain of import statements a depth-first walk from src/http/routes.ts takes to reach src/pricing/couponRules.ts.",
+      "delta": "removed",
+      "participants": [
+        {
+          "node": "src/http/routes.ts"
+        },
+        {
+          "node": "src/checkout/checkoutService.ts"
+        },
+        {
+          "node": "src/pricing/couponRules.ts"
+        }
+      ],
+      "messages": [
+        {
+          "id": "hop-1",
+          "from": "src/http/routes.ts",
+          "to": "src/checkout/checkoutService.ts",
+          "label": "imports checkout, CartItem",
+          "kind": "sync",
+          "delta": "unchanged",
+          "animated": true,
+          "files": [
+            {
+              "path": "src/http/routes.ts",
+              "startLine": 1
+            }
+          ]
+        },
+        {
+          "id": "hop-2",
+          "from": "src/checkout/checkoutService.ts",
+          "to": "src/pricing/couponRules.ts",
+          "label": "imports applyCoupon",
+          "kind": "sync",
+          "delta": "removed",
+          "animated": false,
+          "files": [
+            {
+              "path": "src/checkout/checkoutService.ts",
+              "startLine": 2,
+              "revision": "base"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "filesChanged": 4,
+    "additions": 58,
+    "deletions": 20,
+    "chips": [
+      {
+        "label": "Added",
+        "value": "1",
+        "tone": "added"
+      },
+      {
+        "label": "Changed",
+        "value": "2",
+        "tone": "modified"
+      },
+      {
+        "label": "Removed",
+        "value": "1",
+        "tone": "removed"
+      }
+    ]
+  },
+  "views": [
+    {
+      "id": "architecture-1",
+      "title": "src/checkout → src/pricing",
+      "lens": "architecture",
+      "summary": "Import statements between these directories that touch a changed file: 2 added, 1 modified, 1 removed. An arrow points from the importing file to the imported one and carries the imported names.",
+      "scope": {
+        "kind": "selection",
+        "lanes": [],
+        "nodes": [
+          "src/checkout/checkoutService.ts",
+          "src/pricing/couponRules.ts",
+          "src/pricing/discountCodes.ts",
+          "src/pricing/priceCalculator.ts"
+        ],
+        "edges": [
+          "import:src/checkout/checkoutService.ts:src/pricing/couponRules.ts",
+          "import:src/checkout/checkoutService.ts:src/pricing/discountCodes.ts",
+          "import:src/checkout/checkoutService.ts:src/pricing/priceCalculator.ts",
+          "import:src/pricing/priceCalculator.ts:src/pricing/discountCodes.ts"
+        ],
+        "flows": []
+      },
+      "defaultOpen": true,
+      "children": []
+    },
+    {
+      "id": "architecture-2",
+      "title": "Context · src/http → src/checkout",
+      "lens": "architecture",
+      "summary": "Import statements between these directories that touch a changed file: 1 unchanged. An arrow points from the importing file to the imported one and carries the imported names.",
+      "scope": {
+        "kind": "selection",
+        "lanes": [],
+        "nodes": [
+          "src/http/routes.ts",
+          "src/checkout/checkoutService.ts"
+        ],
+        "edges": [
+          "import:src/http/routes.ts:src/checkout/checkoutService.ts"
+        ],
+        "flows": []
+      },
+      "defaultOpen": false,
+      "children": []
+    },
+    {
+      "id": "architecture-3",
+      "title": "Context · src/checkout → src/catalog",
+      "lens": "architecture",
+      "summary": "Import statements between these directories that touch a changed file: 1 unchanged. An arrow points from the importing file to the imported one and carries the imported names.",
+      "scope": {
+        "kind": "selection",
+        "lanes": [],
+        "nodes": [
+          "src/checkout/checkoutService.ts",
+          "src/catalog/bookRepository.ts"
+        ],
+        "edges": [
+          "import:src/checkout/checkoutService.ts:src/catalog/bookRepository.ts"
+        ],
+        "flows": []
+      },
+      "defaultOpen": false,
+      "children": []
+    },
+    {
+      "id": "import-paths",
+      "title": "Static import paths from src/http/routes.ts (not a runtime trace)",
+      "lens": "data-flow",
+      "summary": "One row per changed file at the end of an import chain (discountCodes, priceCalculator, couponRules): the first chain of import statements that a depth-first walk from src/http/routes.ts, in source order, takes to reach it. checkoutService changed too and sits on those chains. It shows which file imports which; it does not show what runs, when, or with what data.",
+      "scope": {
+        "kind": "selection",
+        "lanes": [],
+        "nodes": [],
+        "edges": [],
+        "flows": [
+          "import-path-1",
+          "import-path-2",
+          "import-path-3"
+        ]
+      },
+      "defaultOpen": true,
+      "children": []
+    }
+  ],
+  "layout": {
+    "laneOrder": [
+      "src/http",
+      "src/checkout",
+      "src/catalog",
+      "src/pricing"
+    ]
+  }
+}

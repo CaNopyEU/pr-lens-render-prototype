@@ -1,0 +1,10 @@
+{
+  "modelTokens": 0,
+  "graphMs": 91,
+  "prLensInstallMs": 2900,
+  "validateMs": 742,
+  "renderMs": 776,
+  "elkInstallMs": 443,
+  "ownSvgMs": 431,
+  "mermaidMs": 30
+}
