@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="701" height="862" viewBox="0 0 701 862" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-labelledby="title desc">
+<title id="title">Replace hard-coded coupons with discount codes</title>
+<desc id="desc">Import graph of the change: 1 new · 2 changed · 1 removed · 2 unchanged files. Each box is a file, each arrow an import statement labelled with the imported names.</desc>
+<defs>
+<pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#FFFFFF"/><rect width="4" height="8" fill="#F2F2F2"/></pattern>
+<marker id="arw0" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#A3A3A3"/></marker>
+<marker id="arw1" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#E11D48"/></marker>
+<marker id="arw2" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#0D9488"/></marker>
+<marker id="arw3" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#B45309"/></marker>
+<marker id="arw4" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#737373"/></marker>
+</defs>
+<rect width="701" height="862" fill="#FFFFFF"/>
+<text x="24" y="41" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#171717" letter-spacing="0.02em">Replace hard-coded coupons with discount codes</text>
+<text x="24" y="63" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" fill="#737373">Import graph of the change: 1 new · 2 changed · 1 removed · 2 unchanged files</text>
+<g transform="translate(24 87)">
+<rect x="162" y="0" width="142" height="118" rx="12" fill="url(#hatch)" stroke="#E5E5E5" stroke-width="1.5"/>
+<rect x="132" y="215" width="260" height="118" rx="12" fill="url(#hatch)" stroke="#E5E5E5" stroke-width="1.5"/>
+<rect x="0" y="450" width="240" height="118" rx="12" fill="url(#hatch)" stroke="#E5E5E5" stroke-width="1.5"/>
+<rect x="280" y="450" width="373" height="235" rx="12" fill="url(#hatch)" stroke="#E5E5E5" stroke-width="1.5"/>
+<path d="M233 102 L233 255" fill="none" stroke="#A3A3A3" stroke-width="1.75" marker-end="url(#arw0)"/>
+<path d="M182 317 L182 348 Q182 356 174 356 L104 356 Q96 356 96 364 L96 490" fill="none" stroke="#A3A3A3" stroke-width="1.75" marker-end="url(#arw0)"/>
+<path d="M216 317 L216 419 Q216 427 224 427 L363 427 Q371 427 371 435 L371 490" fill="none" stroke="#E11D48" stroke-width="1.75" stroke-dasharray="6 5" marker-end="url(#arw1)"/>
+<path d="M250 317 L250 358 Q250 366 258 366 L339 366 Q347 366 347 374 L347 409 Q347 417 355 417 L448 417 Q456 417 456 425 L456 607" fill="none" stroke="#0D9488" stroke-width="1.75" marker-end="url(#arw2)"/>
+<path d="M284 317 L284 348 Q284 356 292 356 L544 356 Q552 356 552 364 L552 490" fill="none" stroke="#B45309" stroke-width="1.75" marker-end="url(#arw3)"/>
+<path d="M552 552 L552 589 Q552 597 544 597 L511 597 Q506 597 506 602 L506 607" fill="none" stroke="#0D9488" stroke-width="1.75" marker-end="url(#arw2)"/>
+<text x="158" y="171" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#737373">checkout, CartItem</text>
+<text x="58" y="396" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#737373">findBook</text>
+<text x="167" y="396" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#BE123C">applyCoupon</text>
+<text x="286" y="396" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#0F766E">lookupDiscount</text>
+<text x="454" y="396" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#B45309">priceCart, subtotalOf +2</text>
+<text x="587" y="584" text-anchor="middle" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#0F766E">Discount</text>
+<text x="178" y="24" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.06em" fill="#171717">SRC/HTTP</text>
+<text x="245" y="239" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.06em" fill="#171717">SRC/CHECKOUT</text>
+<text x="108" y="474" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.06em" fill="#171717">SRC/CATALOG</text>
+<text x="296" y="671" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12" font-weight="500" letter-spacing="0.06em" fill="#171717">SRC/PRICING</text>
+<g>
+<rect x="178" y="40" width="110" height="62" rx="10" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="1.5"/>
+<text x="192" y="65" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#525252">routes</text>
+<rect x="192" y="75" width="82" height="17" rx="8.5" fill="#FFFFFF" stroke="#737373" stroke-width="1.25"/>
+<text x="233" y="87" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#737373">UNCHANGED</text>
+</g>
+<g>
+<rect x="148" y="255" width="170" height="62" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+<text x="162" y="280" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#171717">checkoutService</text>
+<rect x="162" y="290" width="66" height="17" rx="8.5" fill="#FFFFFF" stroke="#B45309" stroke-width="1.25"/>
+<text x="195" y="302" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#B45309">CHANGED</text>
+<text x="238" y="302.5" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12"><tspan fill="#0F766E">+9</tspan><tspan dx="7" fill="#BE123C">−5</tspan></text>
+</g>
+<g>
+<rect x="16" y="490" width="160" height="62" rx="10" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="1.5"/>
+<text x="30" y="515" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#525252">bookRepository</text>
+<rect x="30" y="525" width="82" height="17" rx="8.5" fill="#FFFFFF" stroke="#737373" stroke-width="1.25"/>
+<text x="71" y="537" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#737373">UNCHANGED</text>
+</g>
+<g>
+<rect x="406" y="607" width="150" height="62" rx="10" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.5"/>
+<text x="420" y="632" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#171717">discountCodes</text>
+<rect x="420" y="642" width="38" height="17" rx="8.5" fill="#FFFFFF" stroke="#0D9488" stroke-width="1.25"/>
+<text x="439" y="654" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#0F766E">NEW</text>
+<text x="468" y="654.5" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12"><tspan fill="#0F766E">+29</tspan><tspan dx="7" fill="#737373">−0</tspan></text>
+</g>
+<g>
+<rect x="467" y="490" width="170" height="62" rx="10" fill="#FFFFFF" stroke="#B45309" stroke-width="1.5"/>
+<text x="481" y="515" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#171717">priceCalculator</text>
+<rect x="481" y="525" width="66" height="17" rx="8.5" fill="#FFFFFF" stroke="#B45309" stroke-width="1.25"/>
+<text x="514" y="537" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#B45309">CHANGED</text>
+<text x="557" y="537.5" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12"><tspan fill="#0F766E">+20</tspan><tspan dx="7" fill="#BE123C">−5</tspan></text>
+</g>
+<g>
+<rect x="296" y="490" width="150" height="62" rx="10" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="310" y="515" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#171717" text-decoration="line-through">couponRules</text>
+<rect x="310" y="525" width="66" height="17" rx="8.5" fill="#FFFFFF" stroke="#E11D48" stroke-width="1.25"/>
+<text x="343" y="537" text-anchor="middle" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em" fill="#BE123C">REMOVED</text>
+<text x="386" y="537.5" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="12"><tspan fill="#737373">+0</tspan><tspan dx="7" fill="#BE123C">−10</tspan></text>
+</g>
+<circle r="4" fill="#A3A3A3" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.05;0.15;1" path="M233 102 L233 255"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.05;0.06;0.13;0.15;1"/>
+</circle>
+<circle r="4" fill="#A3A3A3" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.15;0.31;1" path="M182 317 L182 348 Q182 356 174 356 L104 356 Q96 356 96 364 L96 490"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.15;0.17;0.29;0.31;1"/>
+</circle>
+<circle r="4" fill="#0D9488" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.31;0.46;1" path="M250 317 L250 358 Q250 366 258 366 L339 366 Q347 366 347 374 L347 409 Q347 417 355 417 L448 417 Q456 417 456 425 L456 607"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.31;0.33;0.44;0.46;1"/>
+</circle>
+<circle r="4" fill="#B45309" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.46;0.62;1" path="M284 317 L284 348 Q284 356 292 356 L544 356 Q552 356 552 364 L552 490"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.46;0.48;0.6;0.62;1"/>
+</circle>
+<circle r="4" fill="#0D9488" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.62;0.69;1" path="M552 552 L552 589 Q552 597 544 597 L511 597 Q506 597 506 602 L506 607"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.62;0.63;0.67;0.69;1"/>
+</circle>
+<circle r="4" fill="#E11D48" stroke="#FFFFFF" stroke-width="1.5" opacity="0">
+<animateMotion dur="6.5s" repeatCount="indefinite" calcMode="linear" keyPoints="0;0;1;1" keyTimes="0;0.69;0.85;1" path="M216 317 L216 419 Q216 427 224 427 L363 427 Q371 427 371 435 L371 490"/>
+<animate attributeName="opacity" dur="6.5s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.69;0.71;0.83;0.85;1"/>
+</circle>
+</g>
+<line x1="24" y1="804" x2="46" y2="804" stroke="#737373" stroke-width="1.5" marker-end="url(#arw4)"/>
+<text x="54" y="808" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11" fill="#737373">A imports B, labelled with the imported names</text>
+<line x1="382.9" y1="804" x2="404.9" y2="804" stroke="#737373" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="412.9" y="808" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11" fill="#737373">import removed</text>
+<circle cx="35" cy="822" r="4" fill="#737373"/>
+<text x="54" y="826" font-family="'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11" fill="#737373">moving dot: imports that touch a changed file, in walk order from routes.ts</text>
+</svg>

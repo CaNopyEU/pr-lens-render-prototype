@@ -1,0 +1,196 @@
+{
+  "generator": "scripts/build-graph.mjs 0.1.0",
+  "commits": {
+    "baseTip": "9478267b4e20575c66a0eed2b026c669c1e481df",
+    "mergeBase": "9478267b4e20575c66a0eed2b026c669c1e481df",
+    "head": "8ddff3ef16f815147c1cc477b5d616a855f998dc"
+  },
+  "commands": [
+    "git diff --name-status -M 9478267b4e20575c66a0eed2b026c669c1e481df...8ddff3ef16f815147c1cc477b5d616a855f998dc",
+    "git diff --numstat -M 9478267b4e20575c66a0eed2b026c669c1e481df...8ddff3ef16f815147c1cc477b5d616a855f998dc",
+    "git ls-tree -r --name-only <rev> -- src   (rev = 9478267b4e20 and 8ddff3ef16f8)",
+    "git show <rev>:<file>   (import statements parsed from every src/**/*.ts at both revisions)"
+  ],
+  "diff": [
+    "M\tsrc/checkout/checkoutService.ts",
+    "D\tsrc/pricing/couponRules.ts",
+    "A\tsrc/pricing/discountCodes.ts",
+    "M\tsrc/pricing/priceCalculator.ts"
+  ],
+  "nodes": {
+    "src/http/routes.ts": {
+      "path": "src/http/routes.ts",
+      "delta": "unchanged",
+      "lane": "src/http",
+      "fact": "1-hop neighbour: src/http/routes.ts imports src/checkout/checkoutService.ts (src/http/routes.ts:1)"
+    },
+    "src/checkout/checkoutService.ts": {
+      "path": "src/checkout/checkoutService.ts",
+      "delta": "modified",
+      "lane": "src/checkout",
+      "fact": "diff: M\tsrc/checkout/checkoutService.ts"
+    },
+    "src/catalog/bookRepository.ts": {
+      "path": "src/catalog/bookRepository.ts",
+      "delta": "unchanged",
+      "lane": "src/catalog",
+      "fact": "1-hop neighbour: src/catalog/bookRepository.ts is imported by src/checkout/checkoutService.ts (src/checkout/checkoutService.ts:1)"
+    },
+    "src/pricing/discountCodes.ts": {
+      "path": "src/pricing/discountCodes.ts",
+      "delta": "added",
+      "lane": "src/pricing",
+      "fact": "diff: A\tsrc/pricing/discountCodes.ts"
+    },
+    "src/pricing/priceCalculator.ts": {
+      "path": "src/pricing/priceCalculator.ts",
+      "delta": "modified",
+      "lane": "src/pricing",
+      "fact": "diff: M\tsrc/pricing/priceCalculator.ts"
+    },
+    "src/pricing/couponRules.ts": {
+      "path": "src/pricing/couponRules.ts",
+      "delta": "removed",
+      "lane": "src/pricing",
+      "fact": "diff: D\tsrc/pricing/couponRules.ts"
+    }
+  },
+  "edges": {
+    "import:src/http/routes.ts:src/checkout/checkoutService.ts": {
+      "from": "src/http/routes.ts",
+      "to": "src/checkout/checkoutService.ts",
+      "delta": "unchanged",
+      "head": {
+        "sites": [
+          "src/http/routes.ts:1"
+        ],
+        "imports": [
+          "checkout",
+          "CartItem"
+        ]
+      },
+      "base": {
+        "sites": [
+          "src/http/routes.ts:1"
+        ],
+        "imports": [
+          "checkout",
+          "CartItem"
+        ]
+      }
+    },
+    "import:src/checkout/checkoutService.ts:src/catalog/bookRepository.ts": {
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/catalog/bookRepository.ts",
+      "delta": "unchanged",
+      "head": {
+        "sites": [
+          "src/checkout/checkoutService.ts:1"
+        ],
+        "imports": [
+          "findBook"
+        ]
+      },
+      "base": {
+        "sites": [
+          "src/checkout/checkoutService.ts:1"
+        ],
+        "imports": [
+          "findBook"
+        ]
+      }
+    },
+    "import:src/checkout/checkoutService.ts:src/pricing/couponRules.ts": {
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/couponRules.ts",
+      "delta": "removed",
+      "base": {
+        "sites": [
+          "src/checkout/checkoutService.ts:2"
+        ],
+        "imports": [
+          "applyCoupon"
+        ]
+      }
+    },
+    "import:src/checkout/checkoutService.ts:src/pricing/discountCodes.ts": {
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/discountCodes.ts",
+      "delta": "added",
+      "head": {
+        "sites": [
+          "src/checkout/checkoutService.ts:2"
+        ],
+        "imports": [
+          "lookupDiscount"
+        ]
+      }
+    },
+    "import:src/checkout/checkoutService.ts:src/pricing/priceCalculator.ts": {
+      "from": "src/checkout/checkoutService.ts",
+      "to": "src/pricing/priceCalculator.ts",
+      "delta": "modified",
+      "head": {
+        "sites": [
+          "src/checkout/checkoutService.ts:3"
+        ],
+        "imports": [
+          "priceCart",
+          "subtotalOf",
+          "PricedCart",
+          "PricedLine"
+        ]
+      },
+      "base": {
+        "sites": [
+          "src/checkout/checkoutService.ts:3"
+        ],
+        "imports": [
+          "priceCart",
+          "PricedCart",
+          "PricedLine"
+        ]
+      }
+    },
+    "import:src/pricing/priceCalculator.ts:src/pricing/discountCodes.ts": {
+      "from": "src/pricing/priceCalculator.ts",
+      "to": "src/pricing/discountCodes.ts",
+      "delta": "added",
+      "head": {
+        "sites": [
+          "src/pricing/priceCalculator.ts:1"
+        ],
+        "imports": [
+          "Discount"
+        ]
+      }
+    }
+  },
+  "importPaths": {
+    "import-path-1": {
+      "target": "src/pricing/discountCodes.ts",
+      "hops": [
+        "src/http/routes.ts:1 src/http/routes.ts -> src/checkout/checkoutService.ts [unchanged]",
+        "src/checkout/checkoutService.ts:2 src/checkout/checkoutService.ts -> src/pricing/discountCodes.ts [added]"
+      ]
+    },
+    "import-path-2": {
+      "target": "src/pricing/priceCalculator.ts",
+      "hops": [
+        "src/http/routes.ts:1 src/http/routes.ts -> src/checkout/checkoutService.ts [unchanged]",
+        "src/checkout/checkoutService.ts:3 src/checkout/checkoutService.ts -> src/pricing/priceCalculator.ts [modified]"
+      ]
+    },
+    "import-path-3": {
+      "target": "src/pricing/couponRules.ts",
+      "hops": [
+        "src/http/routes.ts:1 src/http/routes.ts -> src/checkout/checkoutService.ts [unchanged]",
+        "src/checkout/checkoutService.ts:2 src/checkout/checkoutService.ts -> src/pricing/couponRules.ts [removed]"
+      ]
+    }
+  },
+  "notReachableFromEntry": [],
+  "droppedEdges": [],
+  "externalImports": [],
+  "skippedDiffEntries": []
+}
